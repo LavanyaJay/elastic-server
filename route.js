@@ -8,16 +8,12 @@ var client = new elasticsearch.Client({
 }); */
 
 router.get("/search", async (req, res, next) => {
-  console.log("calling router");
-  const fromAge = req.query.fromAge;
-  const toAge = req.query.toAge;
-  console.log("fromAge:", fromAge);
   const body = {
     query: {
       range: {
         age: {
-          gt: 10,
-          lte: 20
+          gte: req.query.fromAge,
+          lte: req.query.toAge
         }
       }
     }
